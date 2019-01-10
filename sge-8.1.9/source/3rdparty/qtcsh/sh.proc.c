@@ -48,7 +48,7 @@ RCSID("$tcsh: sh.proc.c,v 3.109 2009/06/25 21:15:37 christos Exp $")
 #endif /* aiws */
 
 #if defined(_BSD) || (defined(IRIS4D) && __STDC__) || defined(__lucid) || defined(linux) || defined(__GNU__) || defined(__GLIBC__)
-# define BSDWAIT
+//# define BSDWAIT   // Fix for "../sh.proc.c:153:16: error: storage size of ‘w’ isn’t known"
 #endif /* _BSD || (IRIS4D && __STDC__) || __lucid || glibc */
 #ifndef WTERMSIG
 # define WTERMSIG(w)	(((union wait *) &(w))->w_termsig)
