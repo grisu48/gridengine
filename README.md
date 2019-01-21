@@ -45,9 +45,43 @@ Now install the binaries to `SGE_ROOT`:
     cd $SGE_ROOT
     ./inst_sge -m -x -csp  # or run ./start_gui_installer
 
-Done ``:-)`
+Done!
 
-## Known issues
+## CentOS 7 (1810)
+
+*Instructions updated on 18.01.2019*
+
+**IMPORTANT**: Please build the SGE not under root! I encountered some cryptic linker errors as root, that disappeared when building as unprivileged user. Also ... (shame on me!) you should never build as root anyways ...
+
+Install **Requirements** with
+
+    yum install java-1.8.0-openjdk java-1.8.0-openjdk-devel gcc ant automake hwloc-devel openssl-devel libdb-devel pam-devel libXt-devel motif-devel ncurses-libs ncurses-devel
+
+Then, as unprivileged user, go into a `tmux` or `screen` session and start the building process with
+
+    cd sge-8.1.9/source
+    ./scripts/bootstrap.sh
+    
+    ./aimk -no-herd -no-java
+    # No HADOOP support and no Java support
+    # Note Java is not needed for qmon!
+
+If you encounter some cryptic linker errors (undefined reference to tputs, tgoto, ecc.) make sure you build as unprivileged user!
+
+The build process takes some time. The generated binaries are (in my case) in the `LINUXAMD64` folder in `sources`
+
+Now install the binaries to `SGE_ROOT`:
+
+    export SGE_ROOT="/opt/sge/"   # Or whereever you want to install the grid engine to
+    scripts/distinst -local -allall -noexit # asks for confirmation
+    cd $SGE_ROOT
+    ./inst_sge -m -x -csp  # or run ./start_gui_installer
+
+Done.
+
+# Known issues
+
+## `storage size of ‘w’ isn’t known`
 
     ../sh.proc.c:153:16: error: storage size of ‘w’ isn’t known
          union wait w;
@@ -58,3 +92,6 @@ This error was the whole reason for forking the repository. Comment out line 51 
     51: //# define BSDWAIT
     52: #endif /* _BSD || (IRIS4D && __STDC__) || __lucid || glibc */
 
+## Linker errors: `undefined reference to tputs, tgoto, ecc.`
+
+I encountered this error when building as root. Try building as unprivileged user (**which you should do anyways!**)
