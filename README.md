@@ -79,6 +79,19 @@ Now install the binaries to `SGE_ROOT`:
 
 Done.
 
+### Build with Java
+
+For the graphical installer, you need to run `aimk` with java support. For that you will need the following additional dependencies
+
+    yum install ant-junit junit javacc
+
+Then building should work with
+
+    ./scripts/bootstrap.sh
+    ./aimk -no-herd
+
+If you get Java version errors, please adjust `build.properties` for your needs.
+
 # Known issues
 
 ## `storage size of ‘w’ isn’t known`
