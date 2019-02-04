@@ -45,7 +45,7 @@ Now install the binaries to `SGE_ROOT`:
     cd $SGE_ROOT
     ./inst_sge -m -x -csp  # or run ./start_gui_installer
 
-Done!
+Done
 
 ## CentOS 7 (1810)
 
@@ -55,7 +55,7 @@ Done!
 
 Install **Requirements** with
 
-    yum install java-1.8.0-openjdk java-1.8.0-openjdk-devel gcc ant automake hwloc-devel openssl-devel libdb-devel pam-devel libXt-devel motif-devel ncurses-libs ncurses-devel
+    yum install csh java-1.8.0-openjdk java-1.8.0-openjdk-devel gcc ant automake hwloc-devel openssl-devel libdb-devel pam-devel libXt-devel motif-devel ncurses-libs ncurses-devel
 
 Then, as unprivileged user, go into a `tmux` or `screen` session and start the building process with
 
@@ -92,6 +92,15 @@ Then building should work with
 
 If you get Java version errors, please adjust `build.properties` for your needs.
 
+# Firewall
+
+In order to make SGE run, you will need to open the following ports
+
+    firewall-cmd --add-port=992/udp --permanent
+    firewall-cmd --add-port=6444/tcp --permanent
+    firewall-cmd --add-port=6445/tcp --permanent
+    firewall-cmd --reload
+
 # Known issues
 
 ## `storage size of ‘w’ isn’t known`
@@ -99,7 +108,7 @@ If you get Java version errors, please adjust `build.properties` for your needs.
     ../sh.proc.c:153:16: error: storage size of ‘w’ isn’t known
          union wait w;
 
-This error was the whole reason for forking the repository. Comment out line 51 in 
+This error was the whole reason for forking the repository. Comment out line 51 in ``sge-8.1.9/source/3rdparty/qtcsh/sh.proc.c` as follows:
 
     50: #if defined(_BSD) || (defined(IRIS4D) && __STDC__) || defined(__lucid) || defined(linux) || defined(__GNU__) || defined(__GLIBC__)
     51: //# define BSDWAIT
@@ -108,3 +117,21 @@ This error was the whole reason for forking the repository. Comment out line 51 
 ## Linker errors: `undefined reference to tputs, tgoto, ecc.`
 
 I encountered this error when building as root. Try building as unprivileged user (**which you should do anyways!**)
+
+## Java version errors
+
+Some weird java version not supported errors occurred to me, when building on OpenSuSE 15 LEAP. Edit the file `build.properties` and put there a more recent Java version like
+
+    # sge-8.1.9/source/build.properties
+    javac.debug=true
+    javac.deprecated=true
+    default.sge.javac.source=1.6
+    default.sge.javac.target=1.6
+    jgdi.javac.source=1.6
+    jgdi.javac.target=1.6
+    jjsv.javac.source=1.6
+    jjsv.javac.target=1.6
+    hadoop.javac.source=1.6
+    hadoop.javac.target=1.6
+
+That should fix the issue.
