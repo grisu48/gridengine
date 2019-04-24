@@ -101,6 +101,32 @@ In order to make SGE run, you will need to open the following ports
     firewall-cmd --add-port=6445/tcp --permanent
     firewall-cmd --reload
 
+# Configuration
+
+## OpenMPI
+
+In case you want to use OpenMPI, make sure to compile OpenMPI with `--with-sge` support.
+
+In case you are using [Spack](https://spack.io), compile OpenMPI with `schedulers="sge" on`
+
+    spack install openmpi%gcc@8.2.0 schedulers="sge"
+
+You will also need to set `control_slaves` and `job_is_first_task` to `true`
+
+    $ qconf -sp openmpi
+    pe_name            openmpi
+    slots              1024
+    user_lists         NONE
+    xuser_lists        NONE
+    start_proc_args    NONE
+    stop_proc_args     NONE
+    allocation_rule    $fill_up
+    control_slaves     TRUE
+    job_is_first_task  TRUE
+    urgency_slots      min
+    accounting_summary FALSE
+    qsort_args         NONE
+
 # Known issues
 
 ## `storage size of ‘w’ isn’t known`
