@@ -15,9 +15,20 @@ Then take a deep breath and be prepared for turbulence.
 
 The suggested (working) build options are: `aimk -no-herd -no-java`
 
-If a command is prefixed with **#** (e.g **#** zypper ...), it should be executed as root.
-If the prefix is **$** then you should execute the command as an unprivileged user.
-**##** indicate comments.
+We use the following convention
+
+
+    # command as root
+    $ command as user
+    ## Command
+
+This means
+
+    # whoami
+    root
+    
+    $ whoami
+    user
 
 ## OpenSUSE 15.0 LEAP
 
