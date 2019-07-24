@@ -21,18 +21,18 @@ The suggested (working) build options are: `aimk -no-herd -no-java`
 
 Install **Requirements** with
 
-    zypper install java-1_8_0-openjdk java-1_8_0-openjdk-devel gcc ant automake hwloc-devel libopenssl-1_0_0-devel libdb-4_8-devel pam-devel libXt-devel motif-devel xorg-x11-devel
+   \# zypper install java-1_8_0-openjdk java-1_8_0-openjdk-devel gcc ant automake hwloc-devel libopenssl-1_0_0-devel libdb-4_8-devel pam-devel libXt-devel motif-devel xorg-x11-devel
 	# Notes: * for the openjdk you can also use a more recent version
 	         * The version libopenssl-1_0_0-devel is required and needs to uninstall the (by default) installed version 1.1
 
 Prepare the environment by executing the `bootstrap.sh` script
 
-    cd sge-8.1.9/source
-    ./scripts/bootstrap.sh
+    $ cd sge-8.1.9/source
+    $ ./scripts/bootstrap.sh
 
 Then build the SGE using
 
-    ./aimk -no-herd -no-java
+    $ ./aimk -no-herd -no-java
     # No HADOOP support and no Java support
     # Note Java is not needed for qmon!
 
@@ -40,10 +40,11 @@ The build process takes some time. The generated binaries are (in my case) in th
 
 Now install the binaries to `SGE_ROOT`:
 
-    export SGE_ROOT="/opt/sge/"   # Or whereever you want to install the grid engine to
-    scripts/distinst -local -allall -noexit # asks for confirmation
-    cd $SGE_ROOT
-    ./inst_sge -m -x -csp  # or run ./start_gui_installer
+    \# export SGE_ROOT="/opt/sge/"   # Or whereever you want to install the grid engine to
+    \# mkdir /opt/sge/
+    \# scripts/distinst -local -allall -noexit # asks for confirmation
+    \# cd $SGE_ROOT
+    \# ./inst_sge -m -x -csp  # or run ./start_gui_installer
 
 Done
 
@@ -55,14 +56,14 @@ Done
 
 Install **Requirements** with
 
-    yum install csh java-1.8.0-openjdk java-1.8.0-openjdk-devel gcc ant automake hwloc-devel openssl-devel libdb-devel pam-devel libXt-devel motif-devel ncurses-libs ncurses-devel
+    \# yum install csh java-1.8.0-openjdk java-1.8.0-openjdk-devel gcc ant automake hwloc-devel openssl-devel libdb-devel pam-devel libXt-devel motif-devel ncurses-libs ncurses-devel
 
 Then, as unprivileged user, go into a `tmux` or `screen` session and start the building process with
 
-    cd sge-8.1.9/source
-    ./scripts/bootstrap.sh
+    $ cd sge-8.1.9/source
+    $ ./scripts/bootstrap.sh
     
-    ./aimk -no-herd -no-java
+    $ ./aimk -no-herd -no-java
     # No HADOOP support and no Java support
     # Note Java is not needed for qmon!
 
@@ -72,10 +73,11 @@ The build process takes some time. The generated binaries are (in my case) in th
 
 Now install the binaries to `SGE_ROOT`:
 
-    export SGE_ROOT="/opt/sge/"   # Or whereever you want to install the grid engine to
-    scripts/distinst -local -allall -noexit # asks for confirmation
-    cd $SGE_ROOT
-    ./inst_sge -m -x -csp  # or run ./start_gui_installer
+    \# export SGE_ROOT="/opt/sge/"   # Or whereever you want to install the grid engine to
+    \# mkdir /opt/sge/
+    \# scripts/distinst -local -allall -noexit # asks for confirmation
+    \# cd $SGE_ROOT
+    \# ./inst_sge -m -x -csp  # or run ./start_gui_installer
 
 Done.
 
@@ -83,12 +85,12 @@ Done.
 
 For the graphical installer, you need to run `aimk` with java support. For that you will need the following additional dependencies
 
-    yum install ant-junit junit javacc
+    \# yum install ant-junit junit javacc
 
 Then building should work with
 
-    ./scripts/bootstrap.sh
-    ./aimk -no-herd
+    $ ./scripts/bootstrap.sh
+    $ ./aimk -no-herd
 
 If you get Java version errors, please adjust `build.properties` for your needs.
 
