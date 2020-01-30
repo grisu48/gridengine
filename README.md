@@ -30,9 +30,9 @@ This means
     $ whoami
     user
 
-## OpenSUSE 15.0 LEAP
+## openSUSE 15.0/15.1 LEAP
 
-*Instructions updated on 10.01.2019*
+*This setup works with openSUSE LEAP 15.0 and 15.1*
 
 Install **Requirements** with
 
