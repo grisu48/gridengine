@@ -64,7 +64,15 @@ echo 'y'| scripts/distinst -local -allall -noexit `dist/util/arch`
 %postun
 
 %files
-%attr(755,root,root) /opt/sge
+%attr(-,root,root) /opt/sge
+%attr(640,root,root) /opt/sge/examples/drmaa/*.c
+%attr(640,root,root) /opt/sge/include/*
+%attr(640,root,root) /opt/sge/pvm/src/*
+%attr(640,root,root) /opt/sge/util/resources/loadsensors/*.c
+%attr(750,root,root) /opt/sge/install*
+%attr(750,root,root) /opt/sge/install*
+%attr(750,root,root) /opt/sge/bin/*
+%attr(750,root,root) /opt/sge/utilbin/*
 /opt/sge/*
 #%license COPYING
 #%doc README
