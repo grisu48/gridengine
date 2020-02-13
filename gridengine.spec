@@ -39,6 +39,7 @@ BuildRequires:	libXt-devel
 BuildRequires:	motif-devel
 BuildRequires:	xorg-x11-devel
 BuildRequires:	ncurses-devel
+Requires:		insserv-compat
 BuildRoot:		%{_tmppath}/%{name}-%{version}-build
 
 %description
