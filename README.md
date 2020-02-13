@@ -1,8 +1,19 @@
 # Gridengine
 
+This project is now also on the [Open Build Service](https://build.opensuse.org/project/show/home:ph03nix:gridengine). There you also find `rpms` for openSUSE (Leap, Tumbleweed), SLES and CentOS.
+
 This repository contains a fork of the [Son of Grid Engine](https://arc.liv.ac.uk/trac/SGE) project in conjunction with some documentation and fixes to get the gridengine working on more recent Linux systems.
 
-# Building
+# Install
+
+First you need to build the source or use the `rpm` packages from the [Open Build Service](https://build.opensuse.org/project/show/home:ph03nix:gridengine). For openSUSE
+
+    # For openSUSE Leap 15.1. Modify accordingly
+    zypper addrepo https://download.opensuse.org/repositories/home:ph03nix:gridengine/openSUSE_Leap_15.1/home:ph03nix:gridengine.repo
+    zypper refresh
+    zypper install gridengine
+
+# Building yourself
 
 Before building make sure you are relaxed and your cup of coffee (or filling of your choice) is full and well temperated.
 
@@ -15,20 +26,6 @@ Then take a deep breath and be prepared for turbulence.
 
 The suggested (working) build options are: `aimk -no-herd -no-java`
 
-We use the following convention
-
-
-    # command as root
-    $ command as user
-    ## Command
-
-This means
-
-    # whoami
-    root
-    
-    $ whoami
-    user
 
 ## Open Build Service
 
@@ -123,6 +120,8 @@ In order to make SGE run, you will need to open the following ports
 
 # Configuration
 
+**Important**: Make sure, your local hostname is present int `/etc/hosts`, otherwise you run into problems during the installation.
+
 ## OpenMPI
 
 In case you want to use OpenMPI, make sure to compile OpenMPI with `--with-sge` support.
@@ -181,3 +180,27 @@ Some weird java version not supported errors occurred to me, when building on Op
     hadoop.javac.target=1.6
 
 That should fix the issue.
+
+## Hostname-related issues
+
+Symptoms for this issue are or that the qmaster script doesn't start in the installation routine, or you get errors like
+
+    error resolving local host: can't resolve host name (h_errno = HOST_NOT_FOUND)
+
+Another symptom are errors related to `act_qmaster`.
+
+
+### Solution
+
+Make sure, your hostname resolved to your local IP and vice-versa by editing your `/etc/hosts` accordingly
+
+Example (Assuming your hostname is `masternode.gridengine.whatever`)
+
+    ## /etc/hosts
+    
+    [...]
+    # IP-Address  Full-Qualified-Hostname  Short-Hostname
+    #
+    127.0.0.1       localhost
+    192.168.0.100   masternode.gridengine.whatever
+
