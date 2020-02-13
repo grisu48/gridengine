@@ -34,22 +34,21 @@ This means
 
 *This setup works with openSUSE LEAP 15.0 and 15.1*
 
-Install **Requirements** with
+Install the **requirements**
 
-    # zypper install java-1_8_0-openjdk java-1_8_0-openjdk-devel gcc ant automake hwloc-devel libopenssl-1_0_0-devel libdb-4_8-devel pam-devel libXt-devel motif-devel xorg-x11-devel
+    # zypper install gcc java-1_8_0-openjdk java-1_8_0-openjdk-devel javacc junit ant automake hwloc-devel libopenssl-devel libdb-4_8-devel pam-devel libXt-devel motif-devel xorg-x11-devel
+    
 	## Notes: * for the openjdk you can also use a more recent version
 	##        * The version libopenssl-1_0_0-devel is required and needs to uninstall the (by default) installed version 1.1
 
 Prepare the environment by executing the `bootstrap.sh` script
 
     $ cd sge-8.1.9/source
-    $ ./scripts/bootstrap.sh
+    $ ./scripts/bootstrap.sh -no-secure -no-remote
 
 Then build the SGE using
 
-    # ./aimk -no-herd -no-java
-    ## No HADOOP support and no Java support
-    ## Note Java is not needed for qmon!
+    # ./aimk -no-herd -no-secure
 
 The build process takes some time. The generated binaries are (in my case) in the `LINUXAMD64` folder in `sources`
 
