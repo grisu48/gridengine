@@ -25,15 +25,22 @@ Url:            https://github.com/grisu48/gridengine
 Source:         gridengine-8.1.9.tar.gz
 BuildRequires:  gcc
 BuildRequires:	tcsh
+%if 0%{?rhel} > 7 || 0%{?suse_version} >= 1500 || 0%{?sle_version} >= 150000 
 BuildRequires:	java-1_8_0-openjdk
 BuildRequires:	java-1_8_0-openjdk-devel
+BuildRequires:	libopenssl-devel
+BuildRequires:	libdb-4_8-devel
+%else
+BuildRequires:	java-1.8.0-openjdk
+BuildRequires:	java-1.8.0-openjdk-devel
+BuildRequires:	libdb-devel
+BuildRequires:	openssl-devel
+%endif
 BuildRequires:	javacc
 BuildRequires:	junit
 BuildRequires:	ant
 BuildRequires:	automake
 BuildRequires:	hwloc-devel
-BuildRequires:	libdb-4_8-devel
-BuildRequires:	libopenssl-devel
 BuildRequires:	pam-devel
 BuildRequires:	libXt-devel
 BuildRequires:	motif-devel
