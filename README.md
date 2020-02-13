@@ -30,6 +30,10 @@ This means
     $ whoami
     user
 
+## Open Build Service
+
+The included spec file [gridengine.spec](gridengine.spec) is meant for use with then SUSE [open build service](https://openbuildservice.org/).
+
 ## openSUSE 15.0/15.1 LEAP
 
 *This setup works with openSUSE LEAP 15.0 and 15.1*
