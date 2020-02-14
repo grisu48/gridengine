@@ -24,7 +24,7 @@ Then take a deep breath and be prepared for turbulence.
 * Build the dependency tool and create dependencies with `aimk`
 * Compile with `aimk`
 
-The suggested (working) build options are: `aimk -no-herd -no-java`
+The suggested (working) build options are: `aimk -no-herd -nosecure -no-java`
 
 
 ## Open Build Service
@@ -45,11 +45,11 @@ Install the **requirements**
 Prepare the environment by executing the `bootstrap.sh` script
 
     $ cd sge-8.1.9/source
-    $ ./scripts/bootstrap.sh -no-secure -no-remote
+    $ ./scripts/bootstrap.sh -no-secure
 
 Then build the SGE using
 
-    # ./aimk -no-herd -no-secure
+    # ./aimk -no-herd -nosecure -no-java
 
 The build process takes some time. The generated binaries are (in my case) in the `LINUXAMD64` folder in `sources`
 
@@ -59,7 +59,9 @@ Now install the binaries to `SGE_ROOT`:
     # mkdir /opt/sge/ ## create target directory
 	# scripts/distinst -local -allall -noexit ## asks for confirmation
     # cd $SGE_ROOT
-    # ./inst_sge -m -x -csp  ## or run '# ./start_gui_installer'
+    # ./inst_sge -m -x -csp
+
+As of now, the `gui_installer` does not work, as we do not have the `izPack` Package included.
 
 Done
 
