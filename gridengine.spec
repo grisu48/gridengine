@@ -20,7 +20,7 @@ Name:           gridengine
 Version:        8.1.9
 Release:        1
 Summary:		Son of Grid engine
-License:        (SISSL and BSD and LGPLv3+ and MIT) and GPLv3+ and GFDL and others
+License:        SISSL and BSD-3-Clause and LGPL-3.0-or-later and MIT and GPL-3.0-or-later and GFDL-1.1
 Url:            https://github.com/grisu48/gridengine
 Source:         gridengine-8.1.9.tar.gz
 BuildRequires:  gcc
@@ -46,6 +46,8 @@ BuildRequires:	libXt-devel
 BuildRequires:	motif-devel
 BuildRequires:	xorg-x11-devel
 BuildRequires:	ncurses-devel
+# Required for tumbleweed only and we do not support Tumbleweed here
+#BuildRequires:  libtirpc-devel
 Requires:		insserv-compat
 BuildRoot:		%{_tmppath}/%{name}-%{version}-build
 
@@ -57,32 +59,29 @@ BuildRoot:		%{_tmppath}/%{name}-%{version}-build
 
 %build
 cd sge-8.1.9/source
-./scripts/bootstrap.sh -no-secure -no-remote
-./aimk -no-herd -no-secure -no-remote
+./scripts/bootstrap.sh -no-secure
+./aimk -no-herd -no-secure -no-java
 
 %install
-export SGE_ROOT="$PWD/opt/sge"
-export SGE_ROOT="%{buildroot}/opt/sge"
+export SGE_ROOT="%{buildroot}/usr/local/bin/sge"
 cd sge-8.1.9/source
 mkdir -p "$SGE_ROOT"
 echo 'y'| scripts/distinst -local -allall -noexit `dist/util/arch`
-
 
 %post
 %postun
 
 %files
-%attr(-,root,root) /opt/sge
-%attr(640,root,root) /opt/sge/examples/drmaa/*.c
-%attr(640,root,root) /opt/sge/include/*
-%attr(640,root,root) /opt/sge/pvm/src/*
-%attr(640,root,root) /opt/sge/util/resources/loadsensors/*.c
-%attr(750,root,root) /opt/sge/install*
-%attr(750,root,root) /opt/sge/install*
-%attr(750,root,root) /opt/sge/bin/*
-%attr(750,root,root) /opt/sge/utilbin/*
-/opt/sge/*
-#%license COPYING
+%attr(-,root,root) /usr/local/bin/sge
+%attr(640,root,root) /usr/local/bin/sge/examples/drmaa/*.c
+%attr(640,root,root) /usr/local/bin/sge/include/*
+%attr(640,root,root) /usr/local/bin/sge/pvm/src/*
+%attr(640,root,root) /usr/local/bin/sge/util/resources/loadsensors/*.c
+%attr(750,root,root) /usr/local/bin/sge/install*
+%attr(750,root,root) /usr/local/bin/sge/install*
+%attr(750,root,root) /usr/local/bin/sge/bin/*
+%attr(750,root,root) /usr/local/bin/sge/utilbin/*
+/usr/local/bin/sge/*
 #%doc README
 
 %changelog
