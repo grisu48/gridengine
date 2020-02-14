@@ -6,12 +6,50 @@ This repository contains a fork of the [Son of Grid Engine](https://arc.liv.ac.u
 
 # Install
 
-First you need to build the source or use the `rpm` packages from the [Open Build Service](https://build.opensuse.org/project/show/home:ph03nix:gridengine). For openSUSE
+First you need to build the source or use the binary packages from the [Open Build Service](https://software.opensuse.org//download.html?project=home%3Aph03nix%3Agridengine&package=gridengine). 
 
-    # For openSUSE Leap 15.1. Modify accordingly
+I only tested openSUSE Leap 15.1 manually. If you manage to get the things running on any other platform, please let me know!
+
+## openSUSE Leap
+
+### openSUSE Leap 15.1
+
     zypper addrepo https://download.opensuse.org/repositories/home:ph03nix:gridengine/openSUSE_Leap_15.1/home:ph03nix:gridengine.repo
     zypper refresh
     zypper install gridengine
+
+### openSUSE Leap 15.2
+
+    zypper addrepo https://download.opensuse.org/repositories/home:ph03nix:gridengine/openSUSE_Leap_15.2/home:ph03nix:gridengine.repo
+    zypper refresh
+    zypper install gridengine
+
+## SLE 15
+
+### SLE 15 SP1
+
+    zypper addrepo https://download.opensuse.org/repositories/home:ph03nix:gridengine/SLE_15_SP1/home:ph03nix:gridengine.repo
+    zypper refresh
+    zypper install gridengine
+
+### SLE 15
+
+    zypper addrepo https://download.opensuse.org/repositories/home:ph03nix:gridengine/SLE_15/home:ph03nix:gridengine.repo
+    zypper refresh
+    zypper install gridengine
+
+## CentOS 7
+
+    cd /etc/yum.repos.d/
+    wget https://download.opensuse.org/repositories/home:ph03nix:gridengine/CentOS_7/home:ph03nix:gridengine.repo
+    yum install gridengine
+
+## Scientific Linux 7
+
+    cd /etc/yum.repos.d/
+    wget https://download.opensuse.org/repositories/home:ph03nix:gridengine/ScientificLinux_7/home:ph03nix:gridengine.repo
+    yum install gridengine
+
 
 # Building yourself
 
