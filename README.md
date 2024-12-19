@@ -1,6 +1,6 @@
 # Gridengine
 
-This project is now also on the [Open Build Service](https://build.opensuse.org/project/show/home:ph03nix:gridengine). There you also find `rpms` for openSUSE (Leap, Tumbleweed), SLES and CentOS.
+*This project is archived. Expect no further development.*
 
 This repository contains a fork of the [Son of Grid Engine](https://arc.liv.ac.uk/trac/SGE) project in conjunction with some documentation and fixes to get the gridengine working on more recent Linux systems.
 
